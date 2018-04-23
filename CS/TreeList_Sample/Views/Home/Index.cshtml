@@ -1,0 +1,24 @@
+﻿<script type="text/javascript">
+    function OnPopupMenuItemClick(s, t) {
+        treeList.PerformCallback({ 'Expand': true });
+    }
+    function OnContextMenu(s, e) {
+        if (e.objectType == "Node") {
+            key = e.objectKey;
+            var state = s.GetNodeState(e.objectKey);
+            if (state != "Child" && state != "NotFound" && e.objectKey == s.GetFocusedNodeKey())
+                PopupMenu.ShowAtPos(ASPxClientUtils.GetEventX(e.htmlEvent), ASPxClientUtils.GetEventY(e.htmlEvent));
+        }
+    }
+</script>
+
+@Html.DevExpress().PopupMenu(settings => {
+    settings.Name = "PopupMenu";
+    settings.Items.Add(item => {
+        item.Text = "Expand to leaf";
+        item.Name = "Expand";
+    });
+    settings.ClientSideEvents.ItemClick = "OnPopupMenuItemClick";
+}).GetHtml()
+
+@Html.Action("TreeListPartial")
