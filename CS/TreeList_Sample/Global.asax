@@ -1,1 +1,0 @@
-<%@ Application Codebehind="Global.asax.cs" Inherits="TreeList_Sample.MvcApplication" Language="C#" %>
